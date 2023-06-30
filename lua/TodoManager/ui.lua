@@ -6,7 +6,9 @@ TodoManager_win_id = nil
 TodoManager_bufh = nil
 
 local function get_config()
-	return {}
+	return {
+		save_on_toggle = true,
+	}
 end
 
 local function close_menu(force_save)
@@ -48,8 +50,7 @@ local function create_window()
 	}
 end
 
-function M.toggle_popup()
-	print("Radi")
+function M.toggle_popup(contents)
 	if TodoManager_win_id ~= nil and vim.api.nvim_win_is_valid(TodoManager_win_id) then
 		close_menu()
 		return
@@ -63,9 +64,8 @@ function M.toggle_popup()
 
 	vim.api.nvim_win_set_option(TodoManager_win_id, "number", true)
 	vim.api.nvim_buf_set_name(TodoManager_bufh, "todo-manager")
-	--vim.api.nvim_buf_set_lines(TodoManager_bufh, 0, #contents, false, contents)
-	vim.api.nvim_buf_set_option(TodoManager_bufh, "filetype", "todomanager")
-	vim.api.nvim_buf_set_option(TodoManager_bufh, "buftype", "acwrite")
+	vim.api.nvim_buf_set_lines(TodoManager_bufh, 0, #contents, false, contents)
+	vim.api.nvim_buf_set_option(TodoManager_bufh, "filetype", "markdown")
 	vim.api.nvim_buf_set_option(TodoManager_bufh, "bufhidden", "delete")
 
 	vim.api.nvim_buf_set_keymap(

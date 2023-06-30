@@ -11,8 +11,14 @@ function M.setup(config)
 	print(curDir)
 end
 
-function M.open() end
+function M.open_dates()
+	local contents = {}
+	ui.toggle_popup(contents)
+end
 
-function M.save() end
+function M.open_status()
+	local contents = {}
+	ui.toggle_popup(contents)
+end
 
 return M
